@@ -19,6 +19,13 @@ adicionarItem.addEventListener("click", (evento) => {
     const containerItemDaLista = document.createElement("div");
     containerItemDaLista.classList.add("lista-item-container");
     const inputCheckBox = document.createElement("input");
+    inputCheckBox.addEventListener("click", function() {
+        if (inputCheckBox.checked) {
+            nomeItem.style.textDecoration = "line-through";
+        } else {
+            nomeItem.style.textDecoration = "none";
+        }
+    })
     inputCheckBox.type = "checkbox";
     inputCheckBox.id = "checkbox-" + contador++;
     const nomeItem = document.createElement("p");
@@ -28,6 +35,26 @@ adicionarItem.addEventListener("click", (evento) => {
     containerItemDaLista.appendChild(nomeItem);
     itemDaLista.appendChild(containerItemDaLista);
 
+
+    const diaDaSemana = new Date().toLocaleDateString("pt-br", {
+        weekday: "long", 
+    });
+    const data = new Date().toLocaleDateString("pt-BR");
+    
+    const hora = new Date().toLocaleTimeString("pt-BR", {
+        hour: "numeric",
+        minute: "numeric"
+    });
+    const dateCompleta = `${diaDaSemana} (${data}) às ${hora}`;
+
+    const dataHora = document.createElement("p");
+    dataHora.classList.add("texto-data");
+    dataHora.innerText = dateCompleta;
+    itemDaLista.appendChild(dataHora);
+    console.log(dateCompleta);
+
+
     lista.appendChild(itemDaLista);
 
+    inputItem.value = "";
 });
