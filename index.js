@@ -57,4 +57,17 @@ adicionarItem.addEventListener("click", (evento) => {
     lista.appendChild(itemDaLista);
 
     inputItem.value = "";
+    
+    verificarListaVazia()
 });
+
+const mensagemListaVazia = document.querySelector(".mensagem-lista-vazia");
+
+function verificarListaVazia() {
+    const itensDaLista = lista.querySelectorAll("li");
+    if (itensDaLista.length === 0) {
+        mensagemListaVazia.style.display = "block";
+    } else {
+        mensagemListaVazia.style.display = "none";
+    }
+}
