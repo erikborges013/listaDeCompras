@@ -1,73 +1,33 @@
+import { criarItemDaLista, inputItem } from "./scripts/criarItemDaLista.js";
 const lista = document.getElementById("lista-de-compras");
-
-const inputItem = document.getElementById("input-item");
-
 const adicionarItem = document.getElementById("adicionar-item");
 
-let contador = 0;
+
 
 adicionarItem.addEventListener("click", (evento) => {
     evento.preventDefault();
-
-    if (inputItem.value === "") {
-        alert("Campo vazio! Por favor digite algum item para inserir.");
-        return;
-    }
-        
-
-    const itemDaLista = document.createElement("li");
-    const containerItemDaLista = document.createElement("div");
-    containerItemDaLista.classList.add("lista-item-container");
-    const inputCheckBox = document.createElement("input");
-    inputCheckBox.addEventListener("click", function() {
-        if (inputCheckBox.checked) {
-            nomeItem.style.textDecoration = "line-through";
-        } else {
-            nomeItem.style.textDecoration = "none";
-        }
-    })
-    inputCheckBox.type = "checkbox";
-    inputCheckBox.id = "checkbox-" + contador++;
-    const nomeItem = document.createElement("p");
-    nomeItem.innerHTML = inputItem.value;
-
-    containerItemDaLista.appendChild(inputCheckBox);
-    containerItemDaLista.appendChild(nomeItem);
-    itemDaLista.appendChild(containerItemDaLista);
-
-
-    const diaDaSemana = new Date().toLocaleDateString("pt-br", {
-        weekday: "long", 
-    });
-    const data = new Date().toLocaleDateString("pt-BR");
     
-    const hora = new Date().toLocaleTimeString("pt-BR", {
-        hour: "numeric",
-        minute: "numeric"
-    });
-    const dateCompleta = `${diaDaSemana} (${data}) às ${hora}`;
-
-    const dataHora = document.createElement("p");
-    dataHora.classList.add("texto-data");
-    dataHora.innerText = dateCompleta;
-    itemDaLista.appendChild(dataHora);
-    console.log(dateCompleta);
-
-
+    const itemDaLista = criarItemDaLista();
     lista.appendChild(itemDaLista);
-
     inputItem.value = "";
+    verificarListaVazia();
     
-    verificarListaVazia()
 });
-
+//Aqui foi selecionado a tage p através da classe e atribuído a variável mensagemListaVazia
 const mensagemListaVazia = document.querySelector(".mensagem-lista-vazia");
 
+//Aqui foi criado uma função para verificar se a lista realmente está vazia.
 function verificarListaVazia() {
+    //Aqui iremos selecionar todas tag's li disponíveis dentro da lu e atribuir a variável itens da lista
     const itensDaLista = lista.querySelectorAll("li");
+    //Após selecionar todas e atribuir uma array a variável itensDaLista, a gente verigica se a quantidade é zero.
     if (itensDaLista.length === 0) {
+        //Caso a quantidade seja zero a gente exibe a mensagem de lista vazia
         mensagemListaVazia.style.display = "block";
     } else {
+        //Caso tenha um ou mais a gente não exibe.
         mensagemListaVazia.style.display = "none";
     }
-}
+};
+    //Aqui a gente chama a função já para abrir verificando se a lista está vazia mesmo.
+    verificarListaVazia();
